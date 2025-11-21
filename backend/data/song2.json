@@ -1,0 +1,15 @@
+{
+  "title": "Mary 2",
+  "tempo": 120,
+  "timeSignature": "4/4",
+  "notes": [
+    { "pitch": "E4", "duration": "q", "bar": 1 },
+    { "pitch": "D4", "duration": "q", "bar": 1 },
+    { "pitch": "C4", "duration": "q", "bar": 1 },
+    { "pitch": "D4", "duration": "q", "bar": 1 },
+
+    { "pitch": "E4", "duration": "q", "bar": 2 },
+    { "pitch": "E4", "duration": "q", "bar": 2 },
+    { "pitch": "E4", "duration": "h", "bar": 2 }
+  ]
+}
