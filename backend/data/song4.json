@@ -9,7 +9,7 @@
     { "pitch": "G4", "duration": "8", "bar": 1 },
     { "pitch": "A4", "duration": "q", "bar": 1 },
 
-    { "pitch": "F4#", "duration": "q", "bar": 2 },
+    { "pitch": "F#4", "duration": "q", "bar": 2 },
     { "pitch": "G4", "duration": "q", "bar": 2 },
     { "pitch": "E4", "duration": "h", "bar": 2 }
   ]

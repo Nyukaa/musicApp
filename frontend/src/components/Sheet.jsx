@@ -20,57 +20,36 @@ export default function Sheet({ notes, currentIndex }) {
 
     stave.addClef("treble").setContext(context).draw();
 
-    // превращаем "C4" -> "c/4"
+    // "C4" -> "c/4"
+    // const vexNotes = notes.map((n) => {
+    //   return new VF.StaveNote({
+    //     keys: [n.pitch.replace(/(\d)/, "/$1").toLowerCase()],
+    //     duration: n.duration,
+    //   });
+    // });
+
     const vexNotes = notes.map((n) => {
-      return new VF.StaveNote({
-        keys: [n.pitch.replace(/(\d)/, "/$1").toLowerCase()],
+      //"C#4", "Bb3", "F4"
+      const match = n.pitch.match(/^([A-Ga-g])([#b]?)(\d)$/);
+      if (!match) {
+        console.warn("Invalid pitch format:", n.pitch);
+        return new VF.StaveNote({ keys: ["c/4"], duration: "q" });
+      }
+
+      const [, note, accidental, octave] = match;
+      const key = note.toLowerCase() + accidental + "/" + octave;
+      const staveNote = new VF.StaveNote({
+        keys: [key],
         duration: n.duration,
       });
+      if (accidental) {
+        staveNote.addModifier(new VF.Accidental(accidental));
+      }
+
+      return staveNote;
     });
-    // Преобразуем ноты в формат VexFlow
-    // const vexNotes = notes.map((n) => {
-    //   const match = n.pitch.match(/^([A-Ga-g])([#b]?)(\d)$/);
-    //   let staveNote;
 
-    //   if (match) {
-    //     const [, note, accidental, octave] = match;
-    //     const key = note.toLowerCase() + "/" + octave;
-    //     staveNote = new VF.StaveNote({ keys: [key], duration: n.duration });
-
-    //     if (accidental === "#") {
-    //       staveNote.addAccidental(0, new VF.Accidental("#"));
-    //     } else if (accidental === "b") {
-    //       staveNote.addAccidental(0, new VF.Accidental("b"));
-    //     }
-    //   } else {
-    //     // fallback — если формат неизвестный, ставим C4 четвертную ноту
-    //     staveNote = new VF.StaveNote({ keys: ["c/4"], duration: "q" });
-    //     console.warn("Invalid pitch format:", n.pitch);
-    //   }
-
-    //   return staveNote;
-    // });
-
-    // const vexNotes = notes.map((n) => {
-    //   // формат: "C#4", "Bb3", "F4"
-    //   const match = n.pitch.match(/^([A-Ga-g])([#b]?)(\d)$/);
-    //   if (!match) {
-    //     console.warn("Invalid pitch format:", n.pitch);
-    //     return new VF.StaveNote({ keys: ["c/4"], duration: "q" });
-    //   }
-
-    //   const [, note, accidental, octave] = match;
-    //   const key = note.toLowerCase() + "/" + octave;
-    //   const staveNote = new VF.StaveNote({ keys: [key], duration: n.duration });
-
-    //   if (accidental) {
-    //     staveNote.addAccidental(0, new VF.Accidental(accidental));
-    //   }
-
-    //   return staveNote;
-    // });
-
-    // Подсветка текущей ноты
+    // Highlight current note
     vexNotes[currentIndex].setStyle({
       fillStyle: "green",
       strokeStyle: "green",
@@ -78,13 +57,6 @@ export default function Sheet({ notes, currentIndex }) {
 
     VF.Formatter.FormatAndDraw(context, stave, vexNotes);
   }, [notes, currentIndex]);
-  // Форматирование и отрисовка
-  //     const voice = new VF.Voice({ num_beats: notes.length, beat_value: 4 });
-  //     voice.addTickables(vexNotes);
-
-  //     new VF.Formatter().joinVoices([voice]).format([voice], 400);
-  //     voice.draw(context, stave);
-  //   }, [notes, currentIndex]);
 
   return <div ref={container}></div>;
 }
