@@ -1,25 +1,46 @@
 import { useEffect, useState } from "react";
 import SongList from "./components/SongList";
 import SongTrainer from "./components/SongTrainer";
+// import "./App.css";
+import "./index.css";
 
 export default function App() {
   const [songs, setSongs] = useState([]);
   const [selectedSong, setSelectedSong] = useState(null);
+  const [loadingSong, setLoadingSong] = useState(false);
 
+  // 1️⃣ Загружаем список песен
   useEffect(() => {
     fetch("http://localhost:3001/api/songs")
       .then((res) => res.json())
       .then(setSongs);
   }, []);
 
-  // Если выбрана песня → запускаем тренажёр
+  // 2️⃣ Когда выбирают песню — загружаем файл (song1.json)
+  async function handleSelectSong(songMeta) {
+    setLoadingSong(true);
+
+    const res = await fetch(`http://localhost:3001/api/song/${songMeta.file}`);
+    const fullSong = await res.json();
+
+    setSelectedSong(fullSong);
+    setLoadingSong(false);
+  }
+
+  // 3️⃣ Если сейчас загружается песня
+  if (loadingSong) {
+    return <div>Loading song...</div>;
+  }
+
+  // 4️⃣ Если песня выбрана — запускаем тренажёр
   if (selectedSong) {
     return (
       <SongTrainer song={selectedSong} onExit={() => setSelectedSong(null)} />
     );
   }
 
-  return <SongList songs={songs} onSelectSong={setSelectedSong} />;
+  // 5️⃣ Иначе показываем список
+  return <SongList songs={songs} onSelectSong={handleSelectSong} />;
 }
 
 // import { useEffect, useState } from "react";

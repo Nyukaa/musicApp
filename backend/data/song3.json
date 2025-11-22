@@ -1,0 +1,20 @@
+{
+  "title": "Minor Melody",
+  "tempo": 90,
+  "timeSignature": "4/4",
+  "notes": [
+    { "pitch": "A3", "duration": "q", "bar": 1 },
+    { "pitch": "C4", "duration": "q", "bar": 1 },
+    { "pitch": "E4", "duration": "q", "bar": 1 },
+    { "pitch": "G4#", "duration": "q", "bar": 1 },
+
+    { "pitch": "A4", "duration": "q", "bar": 2 },
+    { "pitch": "G4", "duration": "q", "bar": 2 },
+    { "pitch": "F4", "duration": "q", "bar": 2 },
+    { "pitch": "E4", "duration": "q", "bar": 2 },
+
+    { "pitch": "D4#", "duration": "q", "bar": 3 },
+    { "pitch": "C4#", "duration": "q", "bar": 3 },
+    { "pitch": "A3", "duration": "h", "bar": 3 }
+  ]
+}

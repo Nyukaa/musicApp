@@ -1,0 +1,16 @@
+{
+  "title": "Happy Melody",
+  "tempo": 120,
+  "timeSignature": "4/4",
+  "notes": [
+    { "pitch": "C4", "duration": "8", "bar": 1 },
+    { "pitch": "D4", "duration": "8", "bar": 1 },
+    { "pitch": "E4", "duration": "8", "bar": 1 },
+    { "pitch": "G4", "duration": "8", "bar": 1 },
+    { "pitch": "A4", "duration": "q", "bar": 1 },
+
+    { "pitch": "F4#", "duration": "q", "bar": 2 },
+    { "pitch": "G4", "duration": "q", "bar": 2 },
+    { "pitch": "E4", "duration": "h", "bar": 2 }
+  ]
+}

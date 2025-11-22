@@ -1,0 +1,16 @@
+{
+  "title": "Chromatic Trainer",
+  "tempo": 80,
+  "timeSignature": "4/4",
+  "notes": [
+    { "pitch": "C4", "duration": "q", "bar": 1 },
+    { "pitch": "C#4", "duration": "q", "bar": 1 },
+    { "pitch": "D4", "duration": "q", "bar": 1 },
+    { "pitch": "D#4", "duration": "q", "bar": 1 },
+
+    { "pitch": "E4", "duration": "q", "bar": 2 },
+    { "pitch": "F4", "duration": "q", "bar": 2 },
+    { "pitch": "F#4", "duration": "q", "bar": 2 },
+    { "pitch": "G4", "duration": "q", "bar": 2 }
+  ]
+}

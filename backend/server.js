@@ -6,7 +6,6 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 
-// --- 1) Список песен ---
 app.get("/api/songs", (req, res) => {
   const dataDir = path.join(__dirname, "data");
 
@@ -29,9 +28,9 @@ app.get("/api/songs", (req, res) => {
   res.json(songs);
 });
 
-// --- 2) Конкретная песня ---
+// only for one song
 app.get("/api/song/:file", (req, res) => {
-  const filename = req.params.file; // например "song1.json"
+  const filename = req.params.file; // // song1.json
   const filePath = path.join(__dirname, "data", filename);
 
   try {
@@ -45,22 +44,3 @@ app.get("/api/song/:file", (req, res) => {
 });
 
 app.listen(3001, () => console.log("BACKEND running on 3001"));
-
-// const express = require("express");
-// const fs = require("fs"); //Используем fs для чтения файла:
-// const path = require("path");
-// const cors = require("cors");
-// const app = express();
-// app.use(cors());
-// app.get("/api/song", (req, res) => {
-//   const filePath = path.join(__dirname, "data", "song1.json");
-//   try {
-//     const json = fs.readFileSync(filePath, "utf-8");
-//     const data = JSON.parse(json);
-//     res.json(data);
-//   } catch (err) {
-//     console.error("Error reading song file:", err);
-//     res.status(500).json({ error: "Failed to load song" });
-//   }
-// });
-// app.listen(3001, () => console.log("BACKEND running on 3001"));

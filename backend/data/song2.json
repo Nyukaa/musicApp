@@ -1,15 +1,24 @@
 {
-  "title": "Mary 2",
-  "tempo": 120,
+  "title": "Twinkle Twinkle",
+  "tempo": 100,
   "timeSignature": "4/4",
   "notes": [
-    { "pitch": "E4", "duration": "q", "bar": 1 },
-    { "pitch": "D4", "duration": "q", "bar": 1 },
     { "pitch": "C4", "duration": "q", "bar": 1 },
-    { "pitch": "D4", "duration": "q", "bar": 1 },
+    { "pitch": "C4", "duration": "q", "bar": 1 },
+    { "pitch": "G4", "duration": "q", "bar": 1 },
+    { "pitch": "G4", "duration": "q", "bar": 1 },
 
-    { "pitch": "E4", "duration": "q", "bar": 2 },
-    { "pitch": "E4", "duration": "q", "bar": 2 },
-    { "pitch": "E4", "duration": "h", "bar": 2 }
+    { "pitch": "A4", "duration": "q", "bar": 2 },
+    { "pitch": "A4", "duration": "q", "bar": 2 },
+    { "pitch": "G4", "duration": "h", "bar": 2 },
+
+    { "pitch": "F4#", "duration": "q", "bar": 3 },
+    { "pitch": "F4#", "duration": "q", "bar": 3 },
+    { "pitch": "E4", "duration": "q", "bar": 3 },
+    { "pitch": "E4", "duration": "q", "bar": 3 },
+
+    { "pitch": "D4", "duration": "q", "bar": 4 },
+    { "pitch": "D4", "duration": "q", "bar": 4 },
+    { "pitch": "C4", "duration": "h", "bar": 4 }
   ]
 }
