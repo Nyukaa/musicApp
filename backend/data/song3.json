@@ -1,20 +1,35 @@
 {
-  "title": "Minor Melody",
-  "tempo": 90,
+  "title": "Astronomia (Coffin Dance)",
+  "tempo": 100,
   "timeSignature": "4/4",
   "notes": [
     { "pitch": "A3", "duration": "q", "bar": 1 },
+    { "pitch": "A3", "duration": "8", "bar": 1 },
+    { "pitch": "E4", "duration": "8", "bar": 1 },
+    { "pitch": "D4", "duration": "q", "bar": 1 },
     { "pitch": "C4", "duration": "q", "bar": 1 },
-    { "pitch": "E4", "duration": "q", "bar": 1 },
-    { "pitch": "G#4", "duration": "q", "bar": 1 },
 
-    { "pitch": "A4", "duration": "q", "bar": 2 },
-    { "pitch": "G4", "duration": "q", "bar": 2 },
-    { "pitch": "F4", "duration": "q", "bar": 2 },
-    { "pitch": "E4", "duration": "q", "bar": 2 },
+    { "pitch": "B3", "duration": "q", "bar": 2 },
+    { "pitch": "B3", "duration": "8", "bar": 2 },
+    { "pitch": "B3", "duration": "8", "bar": 2 },
+    { "pitch": "D4", "duration": "q", "bar": 2 },
+    { "pitch": "C4", "duration": "8", "bar": 2 },
+    { "pitch": "B3", "duration": "8", "bar": 2 },
 
-    { "pitch": "D#4", "duration": "q", "bar": 3 },
-    { "pitch": "C#4", "duration": "q", "bar": 3 },
-    { "pitch": "A3", "duration": "h", "bar": 3 }
+    { "pitch": "A3", "duration": "q", "bar": 3 },
+    { "pitch": "A3", "duration": "8", "bar": 3 },
+    { "pitch": "C4", "duration": "8", "bar": 3 },
+    { "pitch": "B3", "duration": "8", "bar": 3 },
+    { "pitch": "C4", "duration": "8", "bar": 3 },
+    { "pitch": "B3", "duration": "8", "bar": 3 },
+    { "pitch": "C4", "duration": "8", "bar": 3 },
+
+    { "pitch": "A3", "duration": "q", "bar": 4 },
+    { "pitch": "A3", "duration": "8", "bar": 4 },
+    { "pitch": "C4", "duration": "8", "bar": 4 },
+    { "pitch": "B3", "duration": "8", "bar": 4 },
+    { "pitch": "C4", "duration": "8", "bar": 4 },
+    { "pitch": "B3", "duration": "8", "bar": 4 },
+    { "pitch": "C4", "duration": "8", "bar": 4 }
   ]
 }

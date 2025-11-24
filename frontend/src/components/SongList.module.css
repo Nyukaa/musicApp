@@ -30,7 +30,7 @@ body {
 .songCard:hover {
   background: #f2f6ff;
   transform: translateY(-3px);
-  border-color: #a7c3ff;
+  border-color: #4a6bff;
 }
 
 /* Optional: nice fade-in animation */
