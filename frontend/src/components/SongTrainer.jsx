@@ -1,55 +1,119 @@
+// src/SongTrainer.jsx
 import { useState } from "react";
 import Sheet from "./Sheet";
 import PitchDetector from "./PitchDetector";
-import "../index.css";
+import PlayAllButtonTone from "./PlayAllBtnTone";
 import styles from "./SongTrainer.module.css";
 
 export default function SongTrainer({ song, onExit }) {
-  //for saifty check
-  if (!song) {
-    return <div>Loading song...</div>;
-  }
-
-  if (!song.notes || !Array.isArray(song.notes)) {
-    console.log("Song has no notes:", song);
+  // Safety: если song ещё не загружен
+  if (!song) return <div>Loading song...</div>;
+  if (!song.notes || !Array.isArray(song.notes))
     return <div>Error: song has no notes.</div>;
-  }
 
-  // Index of the current note the user must play
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  // Shortcut for notes array
   const notes = song.notes;
 
-  // If user played all notes — finish screen
-  const isFinished = currentIndex >= notes.length;
-  if (isFinished) {
+  // currentIndex:
+  // -1 = режим ожидания (ничего не подсвечено, можно нажать Play All или Start)
+  // 0..N-1 = реальная тренировка (индекс по всей песне)
+  // N и выше = завершено (показываем экран завершения)
+  const [currentIndex, setCurrentIndex] = useState(-1);
+
+  // === 1) Финальный экран (когда индекс >= длины нот) ===
+  if (currentIndex >= notes.length) {
     return (
       <div className={styles.finishScreen}>
         <h1 className={styles.finishTitle}>🎉 You are awesome! 🎉</h1>
-        <button className={styles.finishButton} onClick={onExit}>
-          Back to list
-        </button>
+
+        <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
+          <button
+            className={styles.finishButton}
+            onClick={() => setCurrentIndex(-1)}
+          >
+            Start again
+          </button>
+
+          <button
+            className={styles.finishButton}
+            onClick={onExit}
+            style={{ background: "#999" }}
+          >
+            Back to list
+          </button>
+        </div>
       </div>
     );
   }
 
-  // Current note the user must play
+  // === 2) Экран ожидания (currentIndex === -1) ===
+  if (currentIndex === -1) {
+    return (
+      <div className={styles.container}>
+        <button className={styles.backButton} onClick={onExit}>
+          ← Back
+        </button>
+
+        <h1 className={styles.title}>{song.title}</h1>
+
+        <div className={styles.main}>
+          {/* Play all — он будет вызывать onNote(i) во время проигрывания */}
+          <PlayAllButtonTone
+            notes={notes}
+            tempo={song.tempo || 120}
+            onNote={(i) => {
+              // Когда player сообщает индекс ноты — устанавливаем его.
+              // Когда player сообщает -1 — оставляем экран ожидания.
+              setCurrentIndex(i);
+            }}
+          />
+
+          {/* Start training — сразу в нулевую ноту */}
+          <button
+            className={styles.finishButton}
+            onClick={() => setCurrentIndex(0)}
+          >
+            ▶️ Start training
+          </button>
+        </div>
+
+        {/* Показываем первый такт (или бар 1) для предварительного просмотра */}
+        <div style={{ marginTop: 24 }}>
+          {/* вычислим bar 1 notes, безопасно */}
+          {notes.length > 0 && (
+            <Sheet
+              notes={notes.filter((n) => n.bar === (notes[0].bar || 1))}
+              currentIndex={-1}
+            />
+          )}
+        </div>
+
+        <p className={styles.comment}>
+          Press “Play all” to listen, or “Start training” to begin.
+        </p>
+      </div>
+    );
+  }
+
+  // === 3) SAFE ZONE: currentIndex валиден (0 .. notes.length-1) ===
   const currentNote = notes[currentIndex];
 
-  // Its bar number
-  const currentBar = currentNote.bar;
+  // Ещё дополнительная защита (теоретически currentNote должен существовать)
+  if (!currentNote) {
+    // если вдруг currentNote undefined — возвращаем экран ожидания
+    // (это защитный замок, чтобы не рендерить ошибку)
+    setTimeout(() => setCurrentIndex(-1), 0);
+    return <div>Preparing...</div>;
+  }
 
-  // All notes inside the same bar
+  // определяем текущий бар и ноты этого бара
+  const currentBar = currentNote.bar || 1;
   const barNotes = notes.filter((n) => n.bar === currentBar);
 
-  // Start index of this bar in the whole song
+  // вычисляем индекс первой ноты текущего бара в общей последовательности
   const barStartIndex = notes.findIndex((n) => n.bar === currentBar);
+  const barIndex = currentIndex - barStartIndex; // индекс внутри бара (для Sheet)
 
-  // Index of current note inside the bar
-  const barIndex = currentIndex - barStartIndex;
-
-  // Called when PitchDetector detects the correct pitch
+  // обработчик — вызывается, когда PitchDetector подтвердил ноту
   function handleNoteDetected() {
     setCurrentIndex((i) => i + 1);
   }
@@ -62,6 +126,31 @@ export default function SongTrainer({ song, onExit }) {
 
       <h1 className={styles.title}>{song.title}</h1>
 
+      <div
+        className={styles.main}
+        // style={{
+        //   display: "flex",
+        //   gap: 12,
+        //   alignItems: "center",
+        //   justifyContent: "center",
+        //   marginBottom: 12,
+        // }}
+      >
+        <PlayAllButtonTone
+          notes={notes}
+          tempo={song.tempo || 120}
+          onNote={(i) => setCurrentIndex(i)}
+        />
+        <button
+          className={styles.finishButton}
+          onClick={() => setCurrentIndex(-1)}
+          style={{ background: "#666666" }}
+          title="Stop / Reset to start"
+        >
+          Reset
+        </button>
+      </div>
+
       <Sheet notes={barNotes} currentIndex={barIndex} />
 
       <h2 className={styles.playNote}>Play: {currentNote.pitch}</h2>
@@ -73,3 +162,83 @@ export default function SongTrainer({ song, onExit }) {
     </div>
   );
 }
+
+// import { useState } from "react";
+// import Sheet from "./Sheet";
+// import PitchDetector from "./PitchDetector";
+// import "../index.css";
+// import styles from "./SongTrainer.module.css";
+// import PlayAllButtonTone from "./PlayAllBtnTone";
+// export default function SongTrainer({ song, onExit }) {
+//   //for saifty check
+//   if (!song) {
+//     return <div>Loading song...</div>;
+//   }
+
+//   if (!song.notes || !Array.isArray(song.notes)) {
+//     console.log("Song has no notes:", song);
+//     return <div>Error: song has no notes.</div>;
+//   }
+
+//   // Index of the current note the user must play
+//   const [currentIndex, setCurrentIndex] = useState(0);
+
+//   // Shortcut for notes array
+//   const notes = song.notes;
+
+//   // If user played all notes — finish screen
+//   const isFinished = currentIndex >= notes.length;
+//   if (isFinished) {
+//     return (
+//       <div className={styles.finishScreen}>
+//         <h1 className={styles.finishTitle}>🎉 You are awesome! 🎉</h1>
+//         <button className={styles.finishButton} onClick={onExit}>
+//           Back to list
+//         </button>
+//       </div>
+//     );
+//   }
+
+//   // Current note the user must play
+//   const currentNote = notes[currentIndex];
+
+//   // Its bar number
+//   const currentBar = currentNote.bar;
+
+//   // All notes inside the same bar
+//   const barNotes = notes.filter((n) => n.bar === currentBar);
+
+//   // Start index of this bar in the whole song
+//   const barStartIndex = notes.findIndex((n) => n.bar === currentBar);
+
+//   // Index of current note inside the bar
+//   const barIndex = currentIndex - barStartIndex;
+
+//   // Called when PitchDetector detects the correct pitch
+//   function handleNoteDetected() {
+//     setCurrentIndex((i) => i + 1);
+//   }
+
+//   return (
+//     <div className={styles.container}>
+//       <button className={styles.backButton} onClick={onExit}>
+//         ← Back
+//       </button>
+
+//       <h1 className={styles.title}>{song.title}</h1>
+//       <PlayAllButtonTone
+//         notes={notes}
+//         tempo={120}
+//         onNote={(i) => setCurrentIndex(i)}
+//       />
+//       <Sheet notes={barNotes} currentIndex={barIndex} />
+
+//       <h2 className={styles.playNote}>Play: {currentNote.pitch}</h2>
+
+//       <PitchDetector
+//         onNoteDetected={handleNoteDetected}
+//         currentNote={currentNote}
+//       />
+//     </div>
+//   );
+// }

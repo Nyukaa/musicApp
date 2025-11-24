@@ -104,5 +104,9 @@ export default function PitchDetectorComponent({
     start(); // call detector function
   }, [running, currentNote]); // runs when currentNote changes
 
-  return <div style={{ fontSize: 20 }}>🎤 Listening... play</div>;
+  return (
+    <div>
+      <p>🎤 Listening... play</p>
+    </div>
+  );
 }

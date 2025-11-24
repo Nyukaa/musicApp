@@ -50,7 +50,7 @@ export default function Sheet({ notes, currentIndex }) {
     });
 
     // Highlight current note
-    vexNotes[currentIndex].setStyle({
+    vexNotes[currentIndex]?.setStyle({
       fillStyle: "green",
       strokeStyle: "green",
     });

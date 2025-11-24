@@ -4,7 +4,13 @@
   padding: 20px;
   text-align: center;
 }
-
+.main {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  /* margin-top: 16;
+   gap: 12; */
+}
 .backButton {
   border: none;
   background: none;
@@ -13,11 +19,6 @@
   color: #4a6bff;
   margin-bottom: 10px;
   transition: 0.25s;
-}
-
-.backButton:hover {
-  color: #2d4be5;
-  transform: translateX(-2px);
 }
 
 .title {
@@ -45,16 +46,22 @@
 
 .finishButton {
   padding: 12px 24px;
-  font-size: 18px;
+  height: 60px;
+  /* font-size: 18px; */
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  background: #4a6bff;
+  background: #4caf50;
   color: white;
   transition: 0.25s;
 }
 
 .finishButton:hover {
-  background: #3755e0;
+  background: #4caf50;
   transform: translateY(-2px);
+}
+.comment {
+  text-align: center;
+  color: #666;
+  margin-top: 12px;
 }

@@ -12,8 +12,8 @@
     { "pitch": "A4", "duration": "q", "bar": 2 },
     { "pitch": "G4", "duration": "h", "bar": 2 },
 
-    { "pitch": "F#4", "duration": "q", "bar": 3 },
-    { "pitch": "F#4", "duration": "q", "bar": 3 },
+    { "pitch": "F4", "duration": "q", "bar": 3 },
+    { "pitch": "F4", "duration": "q", "bar": 3 },
     { "pitch": "E4", "duration": "q", "bar": 3 },
     { "pitch": "E4", "duration": "q", "bar": 3 },
 
