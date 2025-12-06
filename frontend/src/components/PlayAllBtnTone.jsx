@@ -119,7 +119,7 @@ export default function PlayAllButtonTone({ notes, tempo = 120, onNote }) {
         cursor: isPlaying ? "not-allowed" : "pointer",
       }}
     >
-      {isPlaying ? "Playing..." : "Play melody 🎵"}
+      {isPlaying ? "Playing..." : "👂 Listen melody"}
     </button>
   );
 }

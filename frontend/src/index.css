@@ -6,6 +6,12 @@ body {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   margin: 10px;
   padding: 10px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
 }
 a {
   font-weight: 500;
@@ -17,13 +23,6 @@ a:hover {
 }
 p {
   font-size: 20px;
-}
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {

@@ -5,7 +5,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   align-content: flex-end;
-  justify-content: space-around;
+  justify-content: center;
 }
 .songListCards {
   max-width: 500px;

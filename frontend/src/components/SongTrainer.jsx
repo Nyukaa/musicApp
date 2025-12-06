@@ -72,7 +72,7 @@ export default function SongTrainer({ song, onExit }) {
             className={styles.finishButton}
             onClick={() => setCurrentIndex(0)}
           >
-            ▶️ Start training
+            🎹 Start training
           </button>
         </div>
 
@@ -88,7 +88,7 @@ export default function SongTrainer({ song, onExit }) {
         </div>
 
         <p className={styles.comment}>
-          Press “Play all” to listen, or “Start training” to begin.
+          Press "Listen melody” or “Start training” to begin.
         </p>
       </div>
     );
@@ -126,16 +126,7 @@ export default function SongTrainer({ song, onExit }) {
 
       <h1 className={styles.title}>{song.title}</h1>
 
-      <div
-        className={styles.main}
-        // style={{
-        //   display: "flex",
-        //   gap: 12,
-        //   alignItems: "center",
-        //   justifyContent: "center",
-        //   marginBottom: 12,
-        // }}
-      >
+      <div className={styles.main}>
         <PlayAllButtonTone
           notes={notes}
           tempo={song.tempo || 120}
@@ -150,9 +141,9 @@ export default function SongTrainer({ song, onExit }) {
           Reset
         </button>
       </div>
-
-      <Sheet notes={barNotes} currentIndex={barIndex} />
-
+      <div className={styles.sheetNotes}>
+        <Sheet notes={barNotes} currentIndex={barIndex} />
+      </div>
       <h2 className={styles.playNote}>Play: {currentNote.pitch}</h2>
 
       <PitchDetector

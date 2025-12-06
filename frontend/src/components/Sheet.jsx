@@ -6,57 +6,74 @@ export default function Sheet({ notes, currentIndex }) {
 
   useEffect(() => {
     if (!notes || notes.length === 0) return;
-    container.current.innerHTML = "";
 
-    const VF = Vex;
-    const renderer = new VF.Renderer(
-      container.current,
-      VF.Renderer.Backends.SVG
-    );
+    const render = () => {
+      const width = container.current.clientWidth || 450;
+      const height = Math.max(180, width * 0.35); // немного увеличиваем высоту
 
-    renderer.resize(450, 200);
-    const context = renderer.getContext();
-    const stave = new VF.Stave(10, 40, 400);
+      container.current.innerHTML = "";
 
-    stave.addClef("treble").setContext(context).draw();
+      const VF = Vex;
+      const renderer = new VF.Renderer(
+        container.current,
+        VF.Renderer.Backends.SVG
+      );
 
-    // "C4" -> "c/4"
-    // const vexNotes = notes.map((n) => {
-    //   return new VF.StaveNote({
-    //     keys: [n.pitch.replace(/(\d)/, "/$1").toLowerCase()],
-    //     duration: n.duration,
-    //   });
-    // });
+      renderer.resize(width, height);
+      const context = renderer.getContext();
+      const stave = new VF.Stave(10, 40, width - 20);
 
-    const vexNotes = notes.map((n) => {
-      //"C#4", "Bb3", "F4"
-      const match = n.pitch.match(/^([A-Ga-g])([#b]?)(\d)$/);
-      if (!match) {
-        console.warn("Invalid pitch format:", n.pitch);
-        return new VF.StaveNote({ keys: ["c/4"], duration: "q" });
-      }
+      stave.addClef("treble").setContext(context).draw();
 
-      const [, note, accidental, octave] = match;
-      const key = note.toLowerCase() + accidental + "/" + octave;
-      const staveNote = new VF.StaveNote({
-        keys: [key],
-        duration: n.duration,
+      const vexNotes = notes.map((n) => {
+        const match = n.pitch.match(/^([A-Ga-g])([#b]?)(\d)$/);
+        if (!match) {
+          console.warn("Invalid pitch:", n.pitch);
+          return new VF.StaveNote({ keys: ["c/4"], duration: "q" });
+        }
+
+        const [, note, accidental, octave] = match;
+        const key = note.toLowerCase() + accidental + "/" + octave;
+
+        const staveNote = new VF.StaveNote({
+          keys: [key],
+          duration: n.duration,
+        });
+
+        if (accidental) {
+          staveNote.addModifier(new VF.Accidental(accidental));
+        }
+
+        return staveNote;
       });
-      if (accidental) {
-        staveNote.addModifier(new VF.Accidental(accidental));
+
+      // выделить текущую ноту
+      if (vexNotes[currentIndex]) {
+        vexNotes[currentIndex].setStyle({
+          fillStyle: "green",
+          strokeStyle: "green",
+        });
       }
 
-      return staveNote;
-    });
+      VF.Formatter.FormatAndDraw(context, stave, vexNotes);
+    };
 
-    // Highlight current note
-    vexNotes[currentIndex]?.setStyle({
-      fillStyle: "green",
-      strokeStyle: "green",
-    });
+    render();
 
-    VF.Formatter.FormatAndDraw(context, stave, vexNotes);
+    // Перерисовывать при изменении размера экрана
+    window.addEventListener("resize", render);
+
+    return () => window.removeEventListener("resize", render);
   }, [notes, currentIndex]);
 
-  return <div ref={container}></div>;
+  return (
+    <div
+      ref={container}
+      style={{
+        width: "100%",
+        maxWidth: "600px",
+        margin: "0 auto",
+      }}
+    ></div>
+  );
 }
