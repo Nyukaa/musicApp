@@ -1,0 +1,16 @@
+{
+  "title": "Scale — G Major",
+  "tempo": 90,
+  "timeSignature": "4/4",
+  "notes": [
+    { "pitch": "G4", "duration": "q", "bar": 1 },
+    { "pitch": "A4", "duration": "q", "bar": 1 },
+    { "pitch": "B4", "duration": "q", "bar": 1 },
+    { "pitch": "C5", "duration": "q", "bar": 1 },
+
+    { "pitch": "D5", "duration": "q", "bar": 2 },
+    { "pitch": "E5", "duration": "q", "bar": 2 },
+    { "pitch": "F#5", "duration": "q", "bar": 2 },
+    { "pitch": "G5", "duration": "q", "bar": 2 }
+  ]
+}

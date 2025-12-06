@@ -8,10 +8,27 @@ body {
   padding: 10px;
   margin: 0;
   display: flex;
+  background-color: rgb(255, 242, 220);
   justify-content: center;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+}
+.listTitle {
+  text-align: center;
+  font-size: 2em;
+  margin: 20px 0;
+  cursor: pointer;
+  user-select: none;
+  border: rgb(5, 175, 161) 2px solid;
+  border-radius: 8px;
+  padding: 10px;
+  transition: background-color 0.25s, color 0.25s;
+}
+.appLogo {
+  height: 40vmin;
+  width: auto;
+  pointer-events: none;
 }
 a {
   font-weight: 500;

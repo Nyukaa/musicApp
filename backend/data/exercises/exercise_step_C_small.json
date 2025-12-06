@@ -1,0 +1,13 @@
+{
+  "title": "Step Exercise — C–D–E–D–C",
+  "tempo": 80,
+  "timeSignature": "4/4",
+  "notes": [
+    { "pitch": "C4", "duration": "q", "bar": 1 },
+    { "pitch": "D4", "duration": "q", "bar": 1 },
+    { "pitch": "E4", "duration": "q", "bar": 1 },
+    { "pitch": "D4", "duration": "q", "bar": 1 },
+
+    { "pitch": "C4", "duration": "h", "bar": 2 }
+  ]
+}

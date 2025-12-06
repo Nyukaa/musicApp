@@ -1,0 +1,16 @@
+{
+  "title": "Scale — A Minor",
+  "tempo": 90,
+  "timeSignature": "4/4",
+  "notes": [
+    { "pitch": "A4", "duration": "q", "bar": 1 },
+    { "pitch": "B4", "duration": "q", "bar": 1 },
+    { "pitch": "C5", "duration": "q", "bar": 1 },
+    { "pitch": "D5", "duration": "q", "bar": 1 },
+
+    { "pitch": "E5", "duration": "q", "bar": 2 },
+    { "pitch": "F5", "duration": "q", "bar": 2 },
+    { "pitch": "G5", "duration": "q", "bar": 2 },
+    { "pitch": "A5", "duration": "q", "bar": 2 }
+  ]
+}

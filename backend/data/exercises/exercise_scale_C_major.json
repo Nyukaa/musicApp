@@ -1,0 +1,25 @@
+{
+  "title": "Scale — C Major",
+  "tempo": 90,
+  "timeSignature": "4/4",
+  "notes": [
+    { "pitch": "C4", "duration": "q", "bar": 1 },
+    { "pitch": "D4", "duration": "q", "bar": 1 },
+    { "pitch": "E4", "duration": "q", "bar": 1 },
+    { "pitch": "F4", "duration": "q", "bar": 1 },
+
+    { "pitch": "G4", "duration": "q", "bar": 2 },
+    { "pitch": "A4", "duration": "q", "bar": 2 },
+    { "pitch": "B4", "duration": "q", "bar": 2 },
+    { "pitch": "C5", "duration": "q", "bar": 2 },
+
+    { "pitch": "B4", "duration": "q", "bar": 3 },
+    { "pitch": "A4", "duration": "q", "bar": 3 },
+    { "pitch": "G4", "duration": "q", "bar": 3 },
+    { "pitch": "F4", "duration": "q", "bar": 3 },
+
+    { "pitch": "E4", "duration": "q", "bar": 4 },
+    { "pitch": "D4", "duration": "q", "bar": 4 },
+    { "pitch": "C4", "duration": "h", "bar": 4 }
+  ]
+}

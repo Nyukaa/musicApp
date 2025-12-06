@@ -1,0 +1,18 @@
+{
+  "title": "Step Exercise — C to G and Back",
+  "tempo": 80,
+  "timeSignature": "4/4",
+  "notes": [
+    { "pitch": "C4", "duration": "q", "bar": 1 },
+    { "pitch": "D4", "duration": "q", "bar": 1 },
+    { "pitch": "E4", "duration": "q", "bar": 1 },
+    { "pitch": "F4", "duration": "q", "bar": 1 },
+
+    { "pitch": "G4", "duration": "q", "bar": 2 },
+    { "pitch": "F4", "duration": "q", "bar": 2 },
+    { "pitch": "E4", "duration": "q", "bar": 2 },
+    { "pitch": "D4", "duration": "q", "bar": 2 },
+
+    { "pitch": "C4", "duration": "h", "bar": 3 }
+  ]
+}
