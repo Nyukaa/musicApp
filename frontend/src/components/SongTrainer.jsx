@@ -4,6 +4,9 @@ import Sheet from "./Sheet";
 import PitchDetector from "./PitchDetector";
 import PlayAllButtonTone from "./PlayAllBtnTone";
 import styles from "./SongTrainer.module.css";
+import { useEffect } from "react";
+import notesImg from "../notes.png";
+import notes2Img from "../notes2.png";
 
 export default function SongTrainer({ song, onExit }) {
   // Safety: если song ещё не загружен
@@ -11,19 +14,39 @@ export default function SongTrainer({ song, onExit }) {
   if (!song.notes || !Array.isArray(song.notes))
     return <div>Error: song has no notes.</div>;
 
-  const notes = song.notes;
+  // const notes = song.notes;
 
   // currentIndex:
   // -1 = режим ожидания (ничего не подсвечено, можно нажать Play All или Start)
   // 0..N-1 = реальная тренировка (индекс по всей песне)
   // N и выше = завершено (показываем экран завершения)
   const [currentIndex, setCurrentIndex] = useState(-1);
+  const notes = song?.notes || [];
 
-  // === 1) Финальный экран (когда индекс >= длины нот) ===
+  const [bgLogo, setBgLogo] = useState(notesImg);
+
+  // Анимация фона: меняем logo каждые 500ms
+  useEffect(() => {
+    const logos = [notesImg, notes2Img];
+    let i = 0;
+    const interval = setInterval(() => {
+      i = (i + 1) % logos.length;
+      setBgLogo(logos[i]);
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, []);
+  // === 1) Экран завершения (currentIndex >= notes.length) ===
   if (currentIndex >= notes.length) {
     return (
       <div className={styles.finishScreen}>
-        <h1 className={styles.finishTitle}>🎉 You are awesome! 🎉</h1>
+        <h1 className={styles.finishTitle}>You are awesome!</h1>
+        {/* Анимированная картинка */}
+        <img
+          src={bgLogo}
+          alt="Logo animation"
+          className={styles.animatedLogo}
+        />
 
         <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
           <button

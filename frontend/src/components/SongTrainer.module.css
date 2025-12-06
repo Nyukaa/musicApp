@@ -36,14 +36,12 @@
   color: #222;
 }
 
-.finishScreen {
-  margin-top: 80px;
-  text-align: center;
-}
-
 .finishTitle {
   font-size: 36px;
-  margin-bottom: 20px;
+  color: rgb(5, 175, 161);
+  font-weight: 700;
+  z-index: 2;
+  position: relative;
 }
 
 .finishButton {
@@ -62,11 +60,27 @@
   background: #4caf50;
   transform: translateY(-2px);
 }
+.animatedLogo {
+  height: 40vmin;
+  width: auto;
+  margin-bottom: 20px;
+}
 .comment {
   text-align: center;
   color: #666;
   margin-top: 12px;
 }
+
+.finishScreen {
+  position: relative;
+  padding: 40px;
+  text-align: center;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.3s ease-in-out;
+}
+
 @media (max-width: 600px) {
   .main {
     flex-direction: column;
