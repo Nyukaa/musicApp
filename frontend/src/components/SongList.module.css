@@ -22,6 +22,8 @@ body {
   background: white;
   font-size: 22px;
   font-weight: 500;
+  position: relative;
+  padding-right: 28px;
   cursor: pointer;
   transition: 0.25s;
   text-align: center;
@@ -33,7 +35,13 @@ body {
   border-color: #4a6bff;
 }
 
-/* Optional: nice fade-in animation */
+.star {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+}
 @keyframes fadeIn {
   from {
     opacity: 0;

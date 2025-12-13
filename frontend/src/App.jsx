@@ -9,7 +9,6 @@ export default function App() {
 
   const [selectedSong, setSelectedSong] = useState(null);
 
-  // Показывать ли списки?
   const [showSongs, setShowSongs] = useState(false);
   const [showExercises, setShowExercises] = useState(false);
 
@@ -26,15 +25,26 @@ export default function App() {
   async function handleSelectSong(song) {
     const res = await fetch(`http://localhost:3001/api/song/${song.file}`);
     const fullSong = await res.json();
-    setSelectedSong(fullSong);
+
+    setSelectedSong({
+      ...fullSong,
+      file: song.file, // ⭐ ВАЖНО
+      id: song.id, // (опционально, но полезно)
+    });
+
     setShowSongs(false);
     setShowExercises(false);
   }
-
   async function handleSelectExercise(ex) {
     const res = await fetch(`http://localhost:3001/api/exercises/${ex.file}`);
     const fullSong = await res.json();
-    setSelectedSong(fullSong);
+
+    setSelectedSong({
+      ...fullSong,
+      file: ex.file,
+      id: ex.id,
+    });
+
     setShowExercises(false);
     setShowSongs(false);
   }

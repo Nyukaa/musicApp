@@ -1,13 +1,13 @@
 // src/SongTrainer.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Sheet from "./Sheet";
 import PitchDetector from "./PitchDetector";
 import PlayAllButtonTone from "./PlayAllBtnTone";
 import styles from "./SongTrainer.module.css";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import notesImg from "../notes.png";
 import notes2Img from "../notes2.png";
-
+import { useProgress } from "../context/ProgressContext";
 export default function SongTrainer({ song, onExit }) {
   // Safety: если song ещё не загружен
   if (!song) return <div>Loading song...</div>;
@@ -24,8 +24,18 @@ export default function SongTrainer({ song, onExit }) {
   const notes = song?.notes || [];
 
   const [bgLogo, setBgLogo] = useState(notesImg);
+  const { dispatch } = useProgress();
+  // Отмечаем песню как завершённую, когда currentIndex выходит за пределы notes.length
+  useEffect(() => {
+    if (currentIndex >= notes.length && notes.length > 0) {
+      dispatch({
+        type: "COMPLETE_SONG",
+        payload: song.file, // используем song.file как идентификатор
+      });
+    }
+  }, [currentIndex, notes.length, song.file, dispatch]);
 
-  // Анимация фона: меняем logo каждые 500ms
+  // Анимация: меняем logo каждые 500ms
   useEffect(() => {
     const logos = [notesImg, notes2Img];
     let i = 0;
@@ -64,6 +74,7 @@ export default function SongTrainer({ song, onExit }) {
             Back to list
           </button>
         </div>
+        <div className={styles.finishStar}>⭐</div>
       </div>
     );
   }
