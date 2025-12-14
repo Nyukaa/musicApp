@@ -23,7 +23,7 @@ export default function App() {
   }, []);
 
   async function handleSelectSong(song) {
-    const res = await fetch(`http://localhost:3001/api/song/${song.file}`);
+    const res = await fetch(`http://localhost:3001/api/songs/${song.file}`);
     const fullSong = await res.json();
 
     setSelectedSong({
@@ -56,7 +56,6 @@ export default function App() {
 
   return (
     <div>
-      {/* Заголовки-кнопки */}
       <div className="image">
         <img src={logo} className="appLogo" alt="logo" />
       </div>

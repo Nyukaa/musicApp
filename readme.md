@@ -58,7 +58,7 @@ The app includes **microphone pitch detection**, **melody playback**, and **visu
 ### API Endpoints
 
 - `GET /api/songs` — list all songs
-- `GET /api/song/:file` — load one song
+- `GET /api/songs/:file` — load one song
 - `GET /api/exercises` — list all exercises
 - `GET /api/exercises/:file` — load one exercise
 
