@@ -11,7 +11,7 @@ body {
   background-color: rgb(255, 242, 220);
   justify-content: center;
   place-items: center;
-  min-width: 320px;
+  /* min-width: 320px; */
   min-height: 100vh;
 }
 .listTitle {
@@ -59,11 +59,59 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #134f90;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Auth buttons container (optional) */
+.authButtons {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+.userLogged {
+  align-self: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #028daf;
+}
+/* Base style */
+.authBtn {
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s ease;
+}
+
+/* Login */
+.loginBtn {
+  background-color: #028daf;
+  color: white;
+}
+
+.loginBtn:hover {
+  background-color: #134f90;
+  transform: translateY(-2px);
+}
+
+/* Register */
+.registerBtn {
+  background-color: transparent;
+  color: #028daf;
+  border: 2px solid #028daf;
+}
+
+.registerBtn:hover {
+  background-color: #028daf;
+  color: white;
+  transform: translateY(-2px);
 }
 
 @media (prefers-color-scheme: light) {

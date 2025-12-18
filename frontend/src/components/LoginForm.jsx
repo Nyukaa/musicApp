@@ -25,33 +25,43 @@ export default function LoginForm({ onLogin, onCancel }) {
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: 50 }}>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit} style={{ display: "inline-block" }}>
-        <div style={{ marginBottom: 12 }}>
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-        <div style={{ marginBottom: 12 }}>
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Login</button>
-        <button type="button" onClick={onCancel}>
-          Cancel
-        </button>
-      </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <div className="authPage">
+      <div className="authCard">
+        <h2 className="authTitle">Login</h2>
+        <form className="authForm" onSubmit={handleSubmit}>
+          <div style={{ marginBottom: 12 }}>
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              className="authInput"
+            />
+          </div>
+          <div style={{ marginBottom: 12 }}>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="authInput"
+            />
+          </div>
+          <button className="authButton" type="submit">
+            Login
+          </button>
+          <button
+            className="authButton secondary"
+            type="button"
+            onClick={onCancel}
+          >
+            Cancel
+          </button>
+        </form>
+        {error && <p className="authError">{error}</p>}
+      </div>
     </div>
   );
 }

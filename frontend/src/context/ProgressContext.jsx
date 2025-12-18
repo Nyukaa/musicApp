@@ -32,6 +32,9 @@ function reducer(state, action) {
     case "SET_PROGRESS":
       return action.payload;
 
+    case "RESET_PROGRESS":
+      return initialState;
+
     default:
       return state;
   }
@@ -51,7 +54,11 @@ export function ProgressProvider({ children }) {
       localStorage.setItem("progress", JSON.stringify(state));
     }
   }, [state, user]);
-
+  useEffect(() => {
+    if (!user) {
+      dispatch({ type: "RESET_PROGRESS" });
+    }
+  }, [user]);
   // ⭐ auth → load from backend
   useEffect(() => {
     if (user) {

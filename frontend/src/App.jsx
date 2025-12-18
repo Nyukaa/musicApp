@@ -91,17 +91,27 @@ export default function App() {
     <div style={{ maxWidth: 700, margin: "auto", padding: 20 }}>
       <div>
         {user ? (
-          <div>
-            <span>{user.username} logged in</span>
-            <button onClick={handleLogout} style={{ marginLeft: 8 }}>
+          <div className="authButtons">
+            <span className="userLogged">{user.username} logged in</span>
+            <button onClick={handleLogout} className="authBtn loginBtn">
               Logout
             </button>
           </div>
         ) : (
-          <>
-            <button onClick={() => setShowLoginForm(true)}>Login</button>
-            <button onClick={() => setShowRegisterForm(true)}>Register</button>
-          </>
+          <div className="authButtons">
+            <button
+              onClick={() => setShowLoginForm(true)}
+              className="authBtn loginBtn"
+            >
+              Login{" "}
+            </button>
+            <button
+              onClick={() => setShowRegisterForm(true)}
+              className="authBtn registerBtn"
+            >
+              Register
+            </button>
+          </div>
         )}
         {showLoginForm && !user && (
           <LoginForm
