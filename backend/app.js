@@ -7,6 +7,7 @@ const exercisesRouter = require("./controllers/exercises");
 const usersRouter = require("./controllers/users");
 const progressRouter = require("./controllers/progress");
 const loginRouter = require("./controllers/login");
+
 const userExtractor = require("./middleware/userExtractor");
 
 const app = express();

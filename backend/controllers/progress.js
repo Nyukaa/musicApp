@@ -1,33 +1,35 @@
 const progressRouter = require("express").Router();
 const Progress = require("../models/progress");
+const userExtractor = require("../middleware/userExtractor");
 
-progressRouter.get("/", async (req, res) => {
-  if (!req.user) {
-    return res.status(401).json({ error: "not authenticated" });
-  }
-
-  const progress = await Progress.findOne({ user: req.user.id });
-
-  res.json(
-    progress || {
-      completedSongs: [],
-      completedExercises: [],
-    }
-  );
-});
-
-progressRouter.post("/song", async (req, res) => {
-  if (!req.user) {
-    return res.status(401).json({ error: "not authenticated" });
-  }
-
-  const { file } = req.body;
-
-  let progress = await Progress.findOne({ user: req.user.id });
+// GET progress
+progressRouter.get("/", userExtractor, async (req, res) => {
+  const user = req.user;
+  const userId = req.user.id; // <- важно
+  let progress = await Progress.findOne({ user: userId });
 
   if (!progress) {
     progress = new Progress({
-      user: req.user.id,
+      user: userId,
+      completedSongs: [],
+      completedExercises: [],
+    });
+    await progress.save();
+  }
+
+  res.json(progress);
+});
+
+// POST completed song
+progressRouter.post("/song", userExtractor, async (req, res) => {
+  const user = req.user;
+  const { file } = req.body;
+  const userId = req.user.id; // <- важно
+  let progress = await Progress.findOne({ user: userId });
+
+  if (!progress) {
+    progress = new Progress({
+      user: userId,
       completedSongs: [],
       completedExercises: [],
     });
@@ -41,18 +43,16 @@ progressRouter.post("/song", async (req, res) => {
   res.json(progress);
 });
 
-progressRouter.post("/exercise", async (req, res) => {
-  if (!req.user) {
-    return res.status(401).json({ error: "not authenticated" });
-  }
-
+// POST completed exercise
+progressRouter.post("/exercise", userExtractor, async (req, res) => {
+  const user = req.user;
   const { file } = req.body;
-
-  let progress = await Progress.findOne({ user: req.user.id });
+  const userId = req.user.id; // <- важно
+  let progress = await Progress.findOne({ user: userId });
 
   if (!progress) {
     progress = new Progress({
-      user: req.user.id,
+      user: userId,
       completedSongs: [],
       completedExercises: [],
     });

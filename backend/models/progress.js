@@ -5,11 +5,16 @@ const progressSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
+    unique: true,
   },
   completedSongs: [
     {
-      file: String, // file name of song/exercise
-      date: { type: Date, default: Date.now },
+      type: String, // song file name
+    },
+  ],
+  completedExercises: [
+    {
+      type: String, // exercise file name
     },
   ],
 });

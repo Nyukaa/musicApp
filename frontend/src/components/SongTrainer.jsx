@@ -25,15 +25,13 @@ export default function SongTrainer({ song, onExit }) {
 
   const [bgLogo, setBgLogo] = useState(notesImg);
   const { dispatch } = useProgress();
+  const { completeSong } = useProgress();
   // Отмечаем песню как завершённую, когда currentIndex выходит за пределы notes.length
   useEffect(() => {
     if (currentIndex >= notes.length && notes.length > 0) {
-      dispatch({
-        type: "COMPLETE_SONG",
-        payload: song.file, // используем song.file как идентификатор
-      });
+      completeSong(song.file);
     }
-  }, [currentIndex, notes.length, song.file, dispatch]);
+  }, [currentIndex, notes.length, song.file]);
 
   // Анимация: меняем logo каждые 500ms
   useEffect(() => {

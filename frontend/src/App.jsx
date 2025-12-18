@@ -94,7 +94,7 @@ export default function App() {
       <div>
         {user ? (
           <div>
-            <span>{user.name} logged in</span>
+            <span>{user.username} logged in</span>
             <button onClick={handleLogout} style={{ marginLeft: 8 }}>
               Logout
             </button>
