@@ -7,6 +7,7 @@ const exercisesRouter = require("./controllers/exercises");
 const usersRouter = require("./controllers/users");
 const progressRouter = require("./controllers/progress");
 const loginRouter = require("./controllers/login");
+const registerRouter = require("./controllers/register");
 
 const userExtractor = require("./middleware/userExtractor");
 
@@ -26,6 +27,7 @@ app.use("/api/exercises", exercisesRouter);
 
 app.use("/api/users", usersRouter);
 app.use("/api/login", loginRouter);
+app.use("/api/register", registerRouter);
 
 // protected routes (с токеном)
 app.use("/api/progress", userExtractor, progressRouter);

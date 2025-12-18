@@ -4,7 +4,9 @@ import SongList from "./components/SongList";
 import ExerciseList from "./components/ExerciseList";
 import SongTrainer from "./components/SongTrainer";
 import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
 import logo from "./notes.png";
+import { useAuth } from "./context/AuthContext";
 
 export default function App() {
   const [songs, setSongs] = useState([]);
@@ -13,10 +15,8 @@ export default function App() {
   const [showSongs, setShowSongs] = useState(false);
   const [showExercises, setShowExercises] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
-
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("loggedUser")) || null
-  );
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
+  const { user, login, logout } = useAuth();
 
   // Загрузка песен и упражнений
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function App() {
     };
     fetchSongs();
     fetchExercises();
-  }, []);
+  }, [user]);
 
   const handleSelectSong = async (song) => {
     try {
@@ -69,14 +69,12 @@ export default function App() {
   };
 
   const handleLogin = (userData) => {
-    setUser(userData);
-    localStorage.setItem("loggedUser", JSON.stringify(userData));
+    login(userData);
     setShowLoginForm(false);
   };
 
   const handleLogout = () => {
-    setUser(null);
-    localStorage.removeItem("loggedUser");
+    logout(null);
   };
 
   if (selectedSong) {
@@ -100,12 +98,24 @@ export default function App() {
             </button>
           </div>
         ) : (
-          <button onClick={() => setShowLoginForm(true)}>Login</button>
+          <>
+            <button onClick={() => setShowLoginForm(true)}>Login</button>
+            <button onClick={() => setShowRegisterForm(true)}>Register</button>
+          </>
         )}
         {showLoginForm && !user && (
           <LoginForm
             onLogin={handleLogin}
             onCancel={() => setShowLoginForm(false)}
+          />
+        )}
+        {showRegisterForm && !user && (
+          <RegisterForm
+            onRegister={(data) => {
+              console.log("Registered:", data);
+              setShowRegisterForm(false);
+            }}
+            onCancel={() => setShowRegisterForm(false)}
           />
         )}
       </div>
