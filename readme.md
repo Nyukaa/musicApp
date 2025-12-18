@@ -1,59 +1,98 @@
-# 🎹 Piano Trainer — Full-Stack Melody & Ear-Training App
+# 🎹 Piano Trainer – React + Vite + Express
 
-A simple and interactive full-stack application designed to help beginners practice melodies, scales, and pitch accuracy.  
-The app includes **microphone pitch detection**, **melody playback**, and **visual sheet-music rendering** — all running in the browser.
+A **junior-friendly full-stack piano training application** built with **React + Vite** and **Express**.  
+The project demonstrates **frontend–backend interaction**, real-time audio processing, authentication, and clean state management using **React Context**.
+
+The app helps beginners practice melodies and exercises with **sheet music**, **melody playback**, and **microphone-based pitch detection**.
+
+🌐 **Live demo:**  
+👉 (add link if deployed, otherwise omit)
+
+💻 **GitHub Repository:**  
+👉 https://github.com/Nyukaa/your-repo-name
 
 ---
 
-## ✅ Features
+## 👩‍💻 Author
 
-- 🎵 **Songs & Exercises Library**  
-  Choose between beginner melodies and step-by-step exercises.
+**Nyukaa**  
+GitHub: https://github.com/Nyukaa  
+Portfolio: https://nyukaa.github.io/BCNew/Portfolio/index.html
 
-- 🎧 **Listen to the Melody**  
-  Full playback using **Tone.js Sampler** with realistic piano sound.
+<!-----
 
-- 🎤 **Pitch Detection Training**  
-  The app listens through your microphone and checks whether you play/sing the correct note.
+ ## 🎯 Project Goals
 
-- 🎼 **Sheet Music Rendering**  
-  Beautiful notation and bar highlighting powered by **VexFlow**.
+This project was created to practice and demonstrate:
 
-- 🧠 **Bar-by-Bar Learning Mode**  
-  The trainer waits until you play the correct note before moving to the next bar.
+- Full-stack development (React + Express)
+- REST API design and usage
+- Authentication with JWT
+- Audio playback and microphone input
+- State management with Context + Reducer
+- Clean and scalable project structure
+- Real-time user interaction in the browser -->
 
-- ⚙️ **Backend API**  
-  Exercises and songs served as clean JSON through Express.
+---
 
-- ⚡ **Fast Frontend**  
-  Built with **React + Vite**, optimized for real-time audio and rendering.
+## 🛠 Technologies Used
+
+<p align="center">
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" />
+  <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Tone.js-ff9800?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/VexFlow-4a148c?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Pitchy-0288d1?style=for-the-badge" />
+</p>
+
+---
+
+## 🎛 How It Works
+
+- **Listen Mode** — Plays the full melody using Tone.js Sampler.
+- **Training Mode** — Highlights current bar in sheet music and waits for correct note (Pitchy microphone input).
+- **Sheet Rendering** — VexFlow renders notes, beams, staves, and active bar highlighting.
+- **Audio Engine** — Tone.js loads Salamander piano samples via CDN for realistic piano sound.
+
+## 🧭 Architecture Overview
+
+- **Frontend**: React + Vite
+- **Backend**: Express API
+- **Database**: MongoDB (Mongoose)
+- **Authentication**: JWT
+- **Audio**:
+  - Tone.js — melody playback
+  - Pitchy — real-time pitch detection
+- **Sheet Music**: VexFlow
+
+### State Management
+
+- AuthContext: login/logout, JWT handling
+
+- ProgressContext (useReducer): completed songs & exercises, guest vs auth users
 
 ---
 
 ## 📁 Project Structure
 
-```
-/backend → Express server + JSON data
-/data
-/songs → song1.json … song5.json
-/exercises → step exercises, scales, intervals
-/frontend → React + Vite app
-```
-
 ---
 
-## 🚀 Setup & Installation
+## 🚀 Quick Start
 
-### 🟦 Backend (Express API)
+### Backend (Express API)
 
-1. Open the backend folder:  
-   `cd backend`
-2. Install dependencies:  
-   `npm install`
-3. Start the server:  
-   `npm start`
-
-📌 Runs on **http://localhost:3001**
+```
+cd backend
+npm install
+npm start
+```
 
 ### API Endpoints
 
@@ -62,49 +101,64 @@ The app includes **microphone pitch detection**, **melody playback**, and **visu
 - `GET /api/exercises` — list all exercises
 - `GET /api/exercises/:file` — load one exercise
 
-📂 Data folders:
-
-- Songs → `backend/data/songs/*.json`
-- Exercises → `backend/data/exercises/*.json`
-
-(_Note:_ There are old folders with typos like `exercies`, `exersicies`; real data is in `data/exercises`.)
-
 ---
 
 ### 🟩 Frontend (React + Vite)
 
-1. Enter the frontend folder:  
-   `cd frontend`
-2. Install:  
-   `npm install`
-3. Run dev server:  
-   `npm run dev`
+```
+cd frontend
+npm install
+npm run dev
+```
 
-Open the URL shown by Vite (usually `http://localhost:5173`).
+### Frontend components:
 
-⚠️ Make sure the backend is running on **port 3001**.
+- LoginForm.jsx / RegisterForm.jsx
+- AuthContext.jsx (user session & JWT)
+- ProgressContext.jsx (completed content state)
+- SongList.jsx / ExerciseList.jsx
+- SongTrainer.jsx (training & playback logic)
+
+## 🔐 Authentication
+
+- Login & Register forms in frontend
+- JWT stored in `localStorage`
+- Protected routes require valid token
+
+Frontend:
+
+- `LoginForm.jsx`
+- `RegisterForm.jsx`
+- `AuthContext.jsx`
+
+Backend:
+
+- `/api/login`
+- `/api/register`
+- JWT middleware for protected routes
 
 ---
 
-## 🎛 How It Works
+## 📄 Data Model
 
-### 🎧 Listen Mode
+Song / Exercise JSON includes:
 
-Plays the entire melody using Tone.js Sampler at the defined tempo.
+- `title`, `tempo`, `timeSignature`
+- `notes`: `{ pitch: "C4", duration: "q", bar: 1 }`
 
-### 🎤 Training Mode
+Supported durations: `w`, `h`, `q`, `8`  
+Pitch format: `C4`, `F#4`, `C#5`
 
-- Displays the current bar
-- Listens to your microphone (Pitchy)
-- Moves to the next bar only when you play the correct note
+---
 
-### 🎼 Sheet Rendering
+## 📚 What I Learned
 
-VexFlow draws all notes, beams, staves and highlights the active bar during training.
-
-### 🎹 Audio Engine
-
-Tone.js loads Salamander piano samples (CDN), providing realistic sound.
+- Full-stack React + Express workflow
+- JWT authentication
+- Managing global state with Context + Reducer
+- Working with audio APIs in the browser
+- Real-time user interaction
+- Structuring scalable React projects
 
 ---
 
@@ -116,39 +170,6 @@ Tone.js loads Salamander piano samples (CDN), providing realistic sound.
 - **Pitchy** — real-time pitch detection
 - **VexFlow** — music notation
 - **Web Audio API** — microphone access
-
----
-
-## 🛠 Troubleshooting
-
-- 🎙 **Microphone permission**  
-  Allow permissions in the browser and refresh.
-
-- 🔥 **CORS errors**  
-  Backend must run at `localhost:3001`.
-
-- 🎵 **No sound**  
-  Piano samples require Internet connection (loaded from Tone.js CDN).
-
-- 🎼 **Sheet not rendering**  
-  Notes must follow correct format:
-  - Pitch: `C4`, `F#5`
-  - Duration: `w`, `h`, `q`, `8`
-  - Bars must have numeric IDs.
-
----
-
-## 📜 Scripts
-
-### Backend
-
-- `npm start`
-
-### Frontend
-
-- `npm run dev`
-- `npm run build`
-- `npm run preview`
 
 ---
 
