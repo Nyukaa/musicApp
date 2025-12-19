@@ -33,7 +33,7 @@ app.use("/api/register", registerRouter);
 app.use("/api/progress", userExtractor, progressRouter);
 
 // 👉 SPA fallback (ВАЖНО!)
-app.get("*", (req, res) => {
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 module.exports = app;
