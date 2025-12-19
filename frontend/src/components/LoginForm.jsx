@@ -5,11 +5,11 @@ export default function LoginForm({ onLogin, onCancel }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-
+  const API_URL = import.meta.env.VITE_API_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3001/api/login", {
+      const res = await axios.post(`${API_URL}/api/login`, {
         username,
         password,
       });

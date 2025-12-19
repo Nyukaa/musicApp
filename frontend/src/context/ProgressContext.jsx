@@ -8,7 +8,7 @@ const initialState = {
   completedSongs: {},
   completedExercises: {},
 };
-
+const API_URL = import.meta.env.VITE_API_URL;
 function reducer(state, action) {
   switch (action.type) {
     case "COMPLETE_SONG":
@@ -42,7 +42,7 @@ function reducer(state, action) {
 
 export function ProgressProvider({ children }) {
   const { user } = useAuth();
-
+  const API_URL = import.meta.env.VITE_API_URL;
   const [state, dispatch] = useReducer(reducer, initialState, () => {
     const saved = localStorage.getItem("progress");
     return saved ? JSON.parse(saved) : initialState;
@@ -63,7 +63,7 @@ export function ProgressProvider({ children }) {
   useEffect(() => {
     if (user) {
       axios
-        .get("http://localhost:3001/api/progress", {
+        .get(`${API_URL}/api/progress`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -92,7 +92,7 @@ export function ProgressProvider({ children }) {
 
     if (user) {
       await axios.post(
-        "http://localhost:3001/api/progress/song",
+        `${API_URL}/api/progress/song`,
         { file },
         {
           headers: {
@@ -108,7 +108,7 @@ export function ProgressProvider({ children }) {
 
     if (user) {
       await axios.post(
-        "http://localhost:3001/api/progress/exercise",
+        `${API_URL}/api/progress/exercise`,
         { file },
         {
           headers: {

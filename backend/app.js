@@ -31,4 +31,9 @@ app.use("/api/register", registerRouter);
 
 // protected routes (с токеном)
 app.use("/api/progress", userExtractor, progressRouter);
+
+// 👉 SPA fallback (ВАЖНО!)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 module.exports = app;

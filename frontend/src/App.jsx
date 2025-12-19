@@ -17,12 +17,12 @@ export default function App() {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
   const { user, login, logout } = useAuth();
-
+  const API_URL = import.meta.env.VITE_API_URL;
   // Загрузка песен и упражнений
   useEffect(() => {
     const fetchSongs = async () => {
       try {
-        const res = await axios.get("http://localhost:3001/api/songs");
+        const res = await axios.get(`${API_URL}/api/songs`);
         setSongs(res.data);
       } catch (err) {
         console.error(err);
@@ -30,7 +30,7 @@ export default function App() {
     };
     const fetchExercises = async () => {
       try {
-        const res = await axios.get("http://localhost:3001/api/exercises");
+        const res = await axios.get(`${API_URL}/api/exercises`);
         setExercises(res.data);
       } catch (err) {
         console.error(err);
@@ -42,10 +42,9 @@ export default function App() {
 
   const handleSelectSong = async (song) => {
     try {
-      const res = await axios.get(
-        `http://localhost:3001/api/songs/${song.file}`,
-        { headers: user ? { Authorization: `Bearer ${user.token}` } : {} }
-      );
+      const res = await axios.get(`${API_URL}/api/songs/${song.file}`, {
+        headers: user ? { Authorization: `Bearer ${user.token}` } : {},
+      });
       setSelectedSong({ ...res.data, file: song.file, id: song.id });
       setShowSongs(false);
       setShowExercises(false);
@@ -56,10 +55,9 @@ export default function App() {
 
   const handleSelectExercise = async (ex) => {
     try {
-      const res = await axios.get(
-        `http://localhost:3001/api/exercises/${ex.file}`,
-        { headers: user ? { Authorization: `Bearer ${user.token}` } : {} }
-      );
+      const res = await axios.get(`${API_URL}/api/exercises/${ex.file}`, {
+        headers: user ? { Authorization: `Bearer ${user.token}` } : {},
+      });
       setSelectedSong({ ...res.data, file: ex.file, id: ex.id });
       setShowSongs(false);
       setShowExercises(false);
