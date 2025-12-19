@@ -5,19 +5,16 @@ The project demonstrates **frontend–backend interaction**, real-time audio pro
 
 The app helps beginners practice melodies and exercises with **sheet music**, **melody playback**, and **microphone-based pitch detection**.
 
-🌐 **Live demo:**  
-👉 (add link if deployed, otherwise omit)
+🌐 [Live demo](https://musicapp-1-983j.onrender.com/)
 
-💻 **GitHub Repository:**  
-👉 https://github.com/Nyukaa/your-repo-name
+💻 [GitHub](https://github.com/Nyukaa/musicApp/)
 
 ---
 
 ## 👩‍💻 Author
 
 **Nyukaa**  
-GitHub: https://github.com/Nyukaa  
-Portfolio: https://nyukaa.github.io/BCNew/Portfolio/index.html
+[GitHub](https://github.com/Nyukaa) | [Portfolio](https://nyukaa.github.io/BCNew/Portfolio/index.html)
 
 <!-----
 
@@ -61,6 +58,26 @@ This project was created to practice and demonstrate:
 - **Sheet Rendering** — VexFlow renders notes, beams, staves, and active bar highlighting.
 - **Audio Engine** — Tone.js loads Salamander piano samples via CDN for realistic piano sound.
 
+### ⭐ Progress & User Modes
+
+- **Guest Mode**
+
+  - No login required
+  - All songs and exercises are playable
+  - Earned ⭐ stars are stored in `localStorage`
+
+- **Authenticated Mode**
+
+  - Progress is saved in MongoDB and linked to the user
+  - Stars are loaded from the backend after login
+  - Progress is automatically updated on completion
+
+- **Seamless Switching**
+  - Logging out keeps the app fully usable
+  - Authentication affects **only progress persistence**, not access to content
+
+---
+
 ## 🧭 Architecture Overview
 
 - **Frontend**: React + Vite
@@ -77,10 +94,6 @@ This project was created to practice and demonstrate:
 - AuthContext: login/logout, JWT handling
 
 - ProgressContext (useReducer): completed songs & exercises, guest vs auth users
-
----
-
-## 📁 Project Structure
 
 ---
 
@@ -173,9 +186,9 @@ Pitch format: `C4`, `F#4`, `C#5`
 
 ---
 
-## 👤 Author
+## 👩‍💻 Author
 
-Portfolio: **https://nyukaa.github.io/BCNew/Portfolio/index.html**  
-GitHub: **https://github.com/Nyukaa**
+**Nyukaa**  
+[GitHub](https://github.com/Nyukaa) | [Portfolio](https://nyukaa.github.io/BCNew/Portfolio/index.html)
 
 ---
